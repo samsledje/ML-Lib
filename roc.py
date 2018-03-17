@@ -46,7 +46,7 @@ def train_test_split(x, y, p_train):
     
     return train_x, train_y, test_x, test_y
 
-def plot_roc(label, proba):
+def plot_roc(title, label, proba):
     """Plots ROC curve
     
     Arguments:
@@ -69,7 +69,7 @@ def plot_roc(label, proba):
     plt.xlim([0,1])
     plt.xticks(np.arange(0, 1.1, 0.1))
     plt.yticks(np.arange(0,1.1, 0.1))
-    plt.title('ROC Curve')
+    plt.title(title)
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive')
     plt.show()

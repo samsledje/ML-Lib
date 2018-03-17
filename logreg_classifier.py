@@ -13,10 +13,11 @@ class LogisticRegressionClassifier:
             y: n*1 column vector of labels
         """
         self.w = None
-        self.alpha = 0.001
-        self.epsilon = 0.001
+        self.alpha = 1
+        self.epsilon = 0.01
         self.n = 0
         self.m = 0
+        self.ll = -float("inf")
 
     def fit(self, x, y):
         """Learns weights using gradient descent
@@ -27,15 +28,20 @@ class LogisticRegressionClassifier:
         """
 
         self.n, self.m = x.shape
-        self.w = np.zeros(x.shape[1])
+        self.w = np.ones(x.shape[1])
         epsilon = float("inf")
-        iters = 0
+        scale = np.linalg.norm(x)
+        x_new = x / scale
+        y_new = y / scale
+        self.ll = self._log_likelihood(self.w, x_new, y_new)
+
         while self.epsilon < epsilon:
-            ll_pre = self._log_likelihood(self.w, x, y)
-            self._update_weights(x, y)
-            ll_new = self._log_likelihood(self.w, x, y)
-            epsilon = abs(ll_pre - ll_new)
-            iters += 1
+            self._update_weights(x_new, y)
+            ll_new = self._log_likelihood(self.w, x_new, y)
+            epsilon = abs(ll_new - self.ll)
+            self.ll = ll_new
+            #input()
+        self.w = self.w * scale
 
     def predict(self, x):
         """Predicts labels given test examples
@@ -47,9 +53,9 @@ class LogisticRegressionClassifier:
             np.ndarray -- predicted labels
         """
 
-        y = np.zeros(self.n)
+        y = np.empty(x.shape[0])
         proba = self.predict_proba(x)
-        for i in range(self.n):
+        for i in range(x.shape[0]):
             y[i] = 1 if proba[i] > 0.5 else 0
         return y
 
@@ -64,9 +70,13 @@ class LogisticRegressionClassifier:
         """
         assert x.shape[1] == (self.m), "X has improper dimensions"
 
-        y = np.zeros(self.n)
-        for i in range(self.n):
-            y[i] = math.exp(np.dot(x[i].transpose(), self.w))/(1+math.exp(np.dot(x[i].transpose(), self.w)))
+        scale = np.linalg.norm(x)
+        x_new = x / scale
+        w_new = self.w / scale
+
+        y = np.zeros(x.shape[0])
+        for i in range(x.shape[0]):
+            y[i] = math.exp(np.dot(x_new[i].transpose(), w_new))/(1+math.exp(np.dot(x_new[i].transpose(), w_new)))
         return y
 
 
@@ -86,10 +96,8 @@ class LogisticRegressionClassifier:
 
     def _update_weights(self, x, y):
         grad_matrix = np.zeros((self.n, self.m))
+        
         for i in range(self.n):
-            first_term = np.dot(y[i], x[i])
-            second_term = np.dot(x[i], math.exp(np.dot(self.w.transpose(), x[i])))
-            third_term = (1 + math.exp(np.dot(self.w.transpose(), x[i])))
-            grad_matrix[i] = first_term - (second_term / third_term)
+            grad_matrix[i] = np.dot(y[i], x[i]) - (np.dot(x[i], math.exp(np.dot(self.w.transpose(), x[i]))) / (1 + math.exp(np.dot(self.w.transpose(), x[i]))))
         grad = np.sum(grad_matrix, axis=0)
-        self.w = self.w - (self.epsilon * grad)
+        self.w = self.w + (self.alpha * grad)

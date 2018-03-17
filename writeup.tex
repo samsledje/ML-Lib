@@ -1,0 +1,55 @@
+\title{Homework 2}
+\author{Samuel Sledzieski}
+\date{\today}
+
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+
+\begin{document}
+\maketitle
+
+\section{Gradient Derivation}
+\begin{equation}
+    LL(\mathbf{w}) = \sum_{i=1}^n y_i\mathbf{w}^T\mathbf{x}_i - \log{(1 + \exp{(\mathbf{w}^T\mathbf{x}_i)})}
+\end{equation}
+
+\begin{equation}
+    \frac{\delta LL}{\delta \mathbf{w}} = \frac{\delta}{\delta \mathbf{w}} \sum_{i=1}^n y_i\mathbf{w}^T\mathbf{x}_i - \log{(1 + \exp{(\mathbf{w}^T\mathbf{x}_i)})}
+\end{equation}
+
+\begin{equation}
+    \frac{\delta LL}{\delta \mathbf{w}} = \sum_{i=1}^n y_i\mathbf{x}_i - \frac{\delta}{\delta \mathbf{w}} \log{(1 + \exp{(\mathbf{w}^T\mathbf{x}_i)})}
+\end{equation}
+
+\begin{equation}
+    \frac{\delta LL}{\delta \mathbf{w}} = \sum_{i=1}^n y_i\mathbf{x}_i - \frac{\frac{\delta}{\delta \mathbf{w}} \exp{(\mathbf{w}^T\mathbf{x}_i)}}{(1 + \exp{(\mathbf{w}^T\mathbf{x}_i)})}
+\end{equation}
+
+\begin{equation}
+    \frac{\delta LL}{\delta \mathbf{w}} = \sum_{i=1}^n y_i\mathbf{x}_i - \frac{\mathbf{x}_i \exp{(\mathbf{w}^T\mathbf{x}_i)}}{(1 + \exp{(\mathbf{w}^T\mathbf{x}_i)})}
+\end{equation}
+\section{Logistic Regression Classifier}
+
+\paragraph{Files}
+The attached tarball contains 4 files.
+
+\begin{itemize}
+    \item logreg\_classifier.py
+    \item roc.py
+    \item main.py
+    \item Runtime.ipynb
+\end{itemize}
+
+logreg\_classifier.py contains the Logistic Regression Classifier. roc.py contains function for plotting ROC.
+main.py loads Wisconsin Breast Cancer dataset from sklearn and divides it into a training set and test set. It then fits the logistic regression classifier using the training set, predicts probabilities on the test set, and plots the ROC curve.
+Runtime.ipynb is a Jupyter notebook which performs the same functions as main.py, then fits an sklearn logistic regression classifier and plots an ROC curve on the same datasets.
+
+\paragraph{ROC Curve}
+Below is the ROC curve of my logistic regression classifier on the Wisconsin Breast Cancer dataset
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{roc}
+\end{figure}
+
+\end{document}
+  

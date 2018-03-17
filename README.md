@@ -1,6 +1,7 @@
 # Logistic Regression Classifier
 
 Logistic Regression Classifier using gradient descent
+
 Written for UConn CSE 5820 (Machine Learning)
 
 - logreg\_classifier.py contains the Logistic Regression Classifier

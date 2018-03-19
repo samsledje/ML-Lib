@@ -9,13 +9,13 @@ def main():
     features, targets = load_data()
 
     logreg = LogisticRegressionClassifier()
-    train_x, train_y, test_x, test_y = train_test_split(features, targets, 1/3)
+    train_x, train_y, test_x, test_y = train_test_split(features, targets, 2/3)
 
     logreg.fit(train_x, train_y)
     probabilities = logreg.predict_proba(test_x)
 
     plot_roc("ROC Curve for Wisconsin Breast Cancer Dataset", test_y, probabilities)
-    
+
 if __name__ == "__main__":
     main()
 

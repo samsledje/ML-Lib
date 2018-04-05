@@ -31,13 +31,13 @@ class LogisticRegressionClassifier:
         self.w = np.ones(x.shape[1])
         epsilon = float("inf")
         scale = np.linalg.norm(x)
-        x_new = x / scale
         y_new = y / scale
+        x_new = x / scale
         self.ll = self._log_likelihood(self.w, x_new, y_new)
 
         while self.epsilon < epsilon:
             self._update_weights(x_new, y)
-            ll_new = self._log_likelihood(self.w, x_new, y)
+            ll_new = self._log_likelihood(self.w, x_new, y_new)
             epsilon = abs(ll_new - self.ll)
             self.ll = ll_new
             #input()

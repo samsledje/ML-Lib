@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.datasets import load_breast_cancer
-from logreg_classifier import LogisticRegressionClassifier
+from Classifiers import LogisticRegressionClassifier
 from random import random
 
 def load():

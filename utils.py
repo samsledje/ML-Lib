@@ -1,5 +1,5 @@
 """
-Utility Functions for SamML
+Utility Functions for ML-Lib
 """
 from sklearn.datasets import load_breast_cancer
 from random import random

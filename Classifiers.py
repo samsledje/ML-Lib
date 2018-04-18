@@ -21,7 +21,7 @@ class LogisticRegressionClassifier:
 
     def fit(self, x, y):
         """Learns weights using gradient descent
-        
+
         Arguments:
             x {np.ndarray} -- training examples
             y {np.ndarray} -- labels
@@ -45,10 +45,10 @@ class LogisticRegressionClassifier:
 
     def predict(self, x):
         """Predicts labels given test examples
-        
+
         Arguments:
             x {np.ndarray} -- test data
-        
+
         Returns:
             np.ndarray -- predicted labels
         """
@@ -61,10 +61,10 @@ class LogisticRegressionClassifier:
 
     def predict_proba(self, x):
         """Predicts labels given test examples
-        
+
         Arguments:
             x {np.ndarray} -- test data
-        
+
         Returns:
             np.ndarray -- probability of class membership
         """
@@ -81,8 +81,8 @@ class LogisticRegressionClassifier:
 
 
     def _log_likelihood(self, w, x, y):
-        """Computes log likelihood 
-        
+        """Computes log likelihood
+
         Arguments:
             w {np.ndarray} -- weights
             x {np.ndarray} -- training examples
@@ -96,7 +96,7 @@ class LogisticRegressionClassifier:
 
     def _update_weights(self, x, y):
         grad_matrix = np.zeros((self.n, self.m))
-        
+
         for i in range(self.n):
             grad_matrix[i] = np.dot(y[i], x[i]) - (np.dot(x[i], math.exp(np.dot(self.w.transpose(), x[i]))) / (1 + math.exp(np.dot(self.w.transpose(), x[i]))))
         grad = np.sum(grad_matrix, axis=0)

@@ -7,4 +7,6 @@ A place for me to practice the implementation of various machine learning algori
 * Logistic Regression Classifier
 * K-Means Clustering
 * Agglomerative Hierarchical Clustering
+
+### In progress
 * Feed-forward Neural Network

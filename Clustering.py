@@ -2,64 +2,9 @@ import math
 import numpy as np
 import random
 import sys
+from utils import _point_distance, _cluster_distance
 
-def point_distance(X1, X2):
-
-    return np.linalg.norm(X1-X2)
-
-def cluster_distance(C1, C2, similarity_measure):
-
-    if similarity_measure == "min":
-        min_dist = np.Infinity
-        for i in C1:
-            for j in C2:
-                dist = point_distance(i, j)
-                if (dist < min_dist):
-                    min_dist = dist
-        return min_dist
-                
-    elif similarity_measure == "max":
-        max_dist = 0
-        for i in C1:
-            for j in C2:
-                dist = point_distance(i, j)
-                if (dist > max_dist):
-                    min_dist = dist
-        return max_dist
-
-    elif similarity_measure == "average":
-        I = len(C1)
-        J = len(C2)
-        d_mat = np.ndarray((I, J))
-        for i in range(I):
-            for j in range(J):
-                d_mat[i][j] = point_distance(C1[i], C2[j])
-        return d_mat.sum() / (I*J)
-        
-    elif similarity_measure == "centroids":
-        c1_centroid = np.sum(C1, axis=0) / len(C1)
-        c2_centroid = np.sum(C2, axis=0) / len(C2)
-        return point_distance(c1_centroid, c2_centroid)
-
-    else:
-        print("Invalid similarity measurement.")
-        sys.exit(1)
-    return point_distance(C1[0], C2[0])
-
-def calculate_sse(clusters, centroids):
-
-    k = len(centroids) 
-    sse = 0
-
-    # Calculate SSE
-    for c in range(k):
-        centroid = centroids[c]
-        for d in clusters[c]:
-            sse += point_distance(d, centroid)**2
-
-    return sse
-
-def KMeansClustering(data, k, seed=12345, large_output = False):
+def KMeansClustering(data, k, seed_init=12345, large_output = False):
     """Clustering using K-Means algorithm
     
     Arguments:
@@ -67,14 +12,14 @@ def KMeansClustering(data, k, seed=12345, large_output = False):
         k {int} -- Number of desired clusters
     
     Keyword Arguments:
-        seed {int} -- Seed for random initialization of centroids (default: {12345})
+        seed_init {int} -- Seed for random initialization of centroids (default: {12345})
         large_output {bool} -- If True, will return cluster and centroids objects (default: {False})
     
     Returns:
         np.ndarray -- (N * (D+1)) matrix where each entry has an additional column indicating the assigned cluster
     """
 
-    random.seed(seed)
+    random.seed(seed_init)
     D = len(data)
     centroids = []
     clusters = [[] for i in range(k)]
@@ -98,7 +43,7 @@ def KMeansClustering(data, k, seed=12345, large_output = False):
         distances = np.zeros((D, k))
         for d in range(D):
             for c in range(k):
-                distances[d][c] = point_distance(data[d], centroids[c])
+                distances[d][c] = _point_distance(data[d], centroids[c])
             old_assignment = point_cluster_mask[d]
             assignment = np.argmin(distances[d])
             clusters[assignment].append(data[d])
@@ -148,7 +93,7 @@ def AggHierClustering(data, k, similarity_measure):
         distances = np.ndarray((C, C))
         for i in range(C):
             for j in range(C):
-                dist = cluster_distance(clusters[i], clusters[j], similarity_measure)
+                dist = _cluster_distance(clusters[i], clusters[j], similarity_measure)
                 distances[i][j] = dist if (not i == j) else np.Infinity
         min_distance_locus = np.unravel_index(np.argmin(distances, axis=None), distances.shape)
 

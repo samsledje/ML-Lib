@@ -101,3 +101,17 @@ class LogisticRegressionClassifier:
             grad_matrix[i] = np.dot(y[i], x[i]) - (np.dot(x[i], math.exp(np.dot(self.w.transpose(), x[i]))) / (1 + math.exp(np.dot(self.w.transpose(), x[i]))))
         grad = np.sum(grad_matrix, axis=0)
         self.w = self.w + (self.alpha * grad)
+
+class LinearRegression:
+    def __init__(self):
+        self._weights = None
+    
+    def fit(self, X, Y):
+        bias_column = np.ones((X.shape[0], 1))
+        X = np.concatenate((bias_column, X), axis=1)
+        self._weights =  np.matmul(np.matmul(np.linalg.inv(np.matmul(X.T, X)), X.T), Y)
+
+    def predict(self, X):
+        bias_column = np.ones((X.shape[0], 1))
+        X = np.concatenate((bias_column, X), axis=1)
+        return np.dot(X, self._weights)

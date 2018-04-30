@@ -17,3 +17,12 @@ def plot_sse(data):
     plt.xlabel("k")
     plt.ylabel("SSE")
     plt.show()
+
+def plot_linear(x, y):
+    # Plot outputs
+    plt.plot(x, y, color='blue', linewidth=3)
+
+    plt.xticks(())
+    plt.yticks(())
+
+    plt.show()

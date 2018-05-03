@@ -54,6 +54,17 @@ def test_linear_regression():
     plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
     plot_linear(diabetes_X_test, diabetes_y_pred)
 
+def test_linear_regression():
+    features,targets = load_breast_cancer(True)
+
+    logreg = LogisticRegressionClassifier()
+    train_x, train_y, test_x, test_y = train_test_split(features, targets, 1/3)
+
+    logreg.fit(train_x, train_y)
+    probabilities = logreg.predict_proba(test_x)
+
+    plot_roc("ROC Curve for Wisconsin Breast Cancer Dataset", test_y, probabilities)
+
 def test_k_means():
     data = read_data(DATA_PATH.format("k_means_data"))
 
@@ -84,14 +95,17 @@ def test_agg_hier():
 if __name__ == "__main__":
     print_header("Select Algorithm to Test")
     case = input(   "1: Linear Regression\n"+
+                    "2: Logistic Regression\n"+
                     "2: K Means Clustering\n"+
                     "3: Agglomerative Hierarchical Testing\n")
     case = int(float(case))
     if case == 1:
         test_linear_regression()
     elif case == 2:
-        test_k_means()
+        test_logistic_regression()
     elif case == 3:
+        test_k_means()
+    elif case == 4:
         test_agg_hier()
     else:
         print("Invalid input")

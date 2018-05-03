@@ -4,6 +4,13 @@ Neural Networks
 import numpy as np
 from utils import *
 
+def _sigmoid(x):
+    return (1 / (1 + np.exp(x)))
+
+def _dev_sigmoid(x):
+    s = sigmoid(x)
+    return s * (1 - s)
+
 class FeedForwardNet:
     def __init__(self, input_neurons, hidden_neurons, output_neurons):
 

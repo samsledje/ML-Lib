@@ -47,16 +47,3 @@ def train_test_split(x, y, p_train):
             test_y = np.append(test_y, y[i])
 
     return train_x, train_y, test_x, test_y
-
-def calculate_sse(clusters, centroids):
-        
-    k = len(centroids) 
-    sse = 0
-
-    # Calculate SSE
-    for c in range(k):
-        centroid = centroids[c]
-        for d in clusters[c]:
-            sse += _point_distance(d, centroid)**2
-
-    return sse

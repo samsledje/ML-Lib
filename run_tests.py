@@ -66,6 +66,7 @@ def test_logistic_regression():
     plot_roc("ROC Curve for Wisconsin Breast Cancer Dataset", test_y, probabilities)
 
 def test_k_means():
+    from Clustering import calculate_sse
     data = read_data(DATA_PATH.format("k_means_data"))
 
     print_header("SSE with varying k")
@@ -96,8 +97,8 @@ if __name__ == "__main__":
     print_header("Select Algorithm to Test")
     case = input(   "1: Linear Regression\n"+
                     "2: Logistic Regression\n"+
-                    "2: K Means Clustering\n"+
-                    "3: Agglomerative Hierarchical Testing\n")
+                    "3: K Means Clustering\n"+
+                    "4: Agglomerative Hierarchical Testing\n")
     case = int(float(case))
     if case == 1:
         test_linear_regression()

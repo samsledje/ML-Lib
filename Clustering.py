@@ -125,6 +125,18 @@ def AggHierClustering(data, k, similarity_measure):
 
 # Helper Functions
 
+def calculate_sse(clusters, centroids):  
+    k = len(centroids) 
+    sse = 0
+
+    # Calculate SSE
+    for c in range(k):
+        centroid = centroids[c]
+        for d in clusters[c]:
+            sse += _point_distance(d, centroid)**2
+
+    return sse
+
 def _point_distance(X1, X2):
     
     return np.linalg.norm(X1-X2)

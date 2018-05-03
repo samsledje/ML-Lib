@@ -54,7 +54,7 @@ def test_linear_regression():
     plt.scatter(diabetes_X_test, diabetes_y_test,  color='black')
     plot_linear(diabetes_X_test, diabetes_y_pred)
 
-def test_linear_regression():
+def test_ogistic_regression():
     features,targets = load_breast_cancer(True)
 
     logreg = LogisticRegressionClassifier()

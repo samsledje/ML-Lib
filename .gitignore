@@ -3,3 +3,5 @@ __pychache__
 .ipynb_checkpoints
 .vscode
 *.tar*
+ML_notes.pdf
+sandbox.py

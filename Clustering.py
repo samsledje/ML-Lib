@@ -123,7 +123,16 @@ def AggHierClustering(data, k, similarity_measure):
 
     return result
 
-# Helper Functions
+def DivHierClustering(data, k):
+    mst = _get_MST()
+    n_clusters = 1
+    while n_clusters < k:
+        pass
+    
+
+####################
+# Helper Functions #
+####################
 
 def calculate_sse(clusters, centroids):  
     k = len(centroids) 
@@ -179,3 +188,6 @@ def _cluster_distance(C1, C2, similarity_measure):
         print("Invalid similarity measurement.")
         sys.exit(1)
     return _point_distance(C1[0], C2[0])
+
+def get_MST(points):
+    

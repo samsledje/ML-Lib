@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+# Utility Functions
+
 def print_header(s):
     S = len(s)
     bar = "-" * (S + 4)

@@ -2,7 +2,7 @@ import math
 import numpy as np
 import random
 import sys
-from utils import *
+
 
 def KMeansClustering(data, k, seed_init=12345, large_output = False):
     """Clustering using K-Means algorithm
@@ -124,7 +124,7 @@ def AggHierClustering(data, k, similarity_measure):
     return result
 
 def DivHierClustering(data, k):
-    mst = _get_MST()
+    #mst = get_MST(data)
     n_clusters = 1
     while n_clusters < k:
         pass
@@ -176,7 +176,7 @@ def _cluster_distance(C1, C2, similarity_measure):
         d_mat = np.ndarray((I, J))
         for i in range(I):
             for j in range(J):
-                d_mat[i][j] = point_distance(C1[i], C2[j])
+                d_mat[i][j] = _point_distance(C1[i], C2[j])
         return d_mat.sum() / (I*J)
         
     elif similarity_measure == "centroids":
@@ -190,4 +190,4 @@ def _cluster_distance(C1, C2, similarity_measure):
     return _point_distance(C1[0], C2[0])
 
 def get_MST(points):
-    
+    return 1

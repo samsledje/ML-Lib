@@ -2,7 +2,7 @@
 # Basic imports
 import numpy as np
 import matplotlib.pyplot as plt
-import sys
+from time import sleep
 
 # sklearn Imports
 from sklearn.datasets import load_iris, load_diabetes, load_breast_cancer
@@ -11,8 +11,8 @@ from sklearn.metrics import mean_squared_error, r2_score
 # SaML Imports
 from Regression import LinearRegression, LogisticRegressionClassifier
 from Clustering import KMeansClustering, AggHierClustering
-from Plotting import *
-from utils import *
+from Plotting import plot_clusters, plot_linear, plot_roc, plot_sse
+from utils import print_header, read_data, backspace, write
 
 # Path to Datasets
 DATA_PATH = ('test_data/{}')
@@ -99,7 +99,10 @@ if __name__ == "__main__":
                     "2: Logistic Regression\n"+
                     "3: K Means Clustering\n"+
                     "4: Agglomerative Hierarchical Testing\n")
-    case = int(float(case))
+    case = int(float(case.strip()))
+    write("test")
+    sleep(3)
+    backspace(4)
     if case == 1:
         test_linear_regression()
     elif case == 2:
@@ -110,4 +113,4 @@ if __name__ == "__main__":
         test_agg_hier()
     else:
         print("Invalid input")
-        sys.exit(1)
+        quit(1)

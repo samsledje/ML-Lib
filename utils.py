@@ -9,8 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-# Utility Functions
-
+# I/O Functions
 def print_header(s):
     S = len(s)
     bar = "-" * (S + 4)
@@ -20,10 +19,23 @@ def print_header(s):
     print(header)
     print(bar)
 
+def backspace(l):
+    sys.stdout.write('\b'*l + ' '*l + '\b' * l)
+
+def write(msg):
+    sys.stdout.write(msg)
+    sys.stdout.flush()
+
+def writeln(msg):
+    sys.stdout.write(msg)
+    sys.stdout.write('\n')
+    sys.stdout.flush()
+
 def read_data(txt):
     with open(txt) as f:
         return np.loadtxt(f)
 
+# Utility Functions
 def train_test_split(x, y, p_train):
     """Splits records into train and test set, with {p_train} of the records in the train set, and the rest in the test set
 
@@ -36,7 +48,6 @@ def train_test_split(x, y, p_train):
         np.ndarray, np.ndarray, np.ndarray, np.ndarray -- train_x, train_y, test_x, test_y
     """
 
-    p_test = 1 - p_train
     train_x = test_x = np.empty((0, x.shape[1]))
     train_y = test_y = np.empty((0, x.shape[0]))
 

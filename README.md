@@ -1,4 +1,4 @@
-# ML-Lib
+# SaML-Lib
 
 A place for me to practice the implementation of various machine learning algorithms.
 
@@ -10,6 +10,6 @@ A place for me to practice the implementation of various machine learning algori
 
 ### In progress
 * Feed-forward Neural Network
-* Divising Hierarchical Clustering
+* Divisive Hierarchical Clustering
 * Data validation
 * Spectral clustering (Ratio-Cut)

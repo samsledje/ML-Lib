@@ -100,9 +100,6 @@ if __name__ == "__main__":
                     "3: K Means Clustering\n"+
                     "4: Agglomerative Hierarchical Testing\n")
     case = int(float(case.strip()))
-    write("test")
-    sleep(3)
-    backspace(4)
     if case == 1:
         test_linear_regression()
     elif case == 2:

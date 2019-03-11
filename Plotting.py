@@ -40,7 +40,7 @@ def plot_roc(title, label, proba):
     pair = pd.concat((pd.DataFrame(proba), pd.DataFrame(label)), axis=1)
     pair.columns = ("proba", "target")
     pair_sorted = pair.sort_values(pair.columns[0], ascending=False)
-    matrix = pair_sorted.as_matrix()
+    matrix = pair_sorted.values
     for i in matrix:
         thresh = i[0]
         rates.append(_calc_rates(matrix, thresh))

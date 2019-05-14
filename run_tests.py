@@ -12,7 +12,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 from Regression import LinearRegression, LogisticRegressionClassifier
 from Clustering import KMeansClustering, AggHierClustering
 from Plotting import plot_clusters, plot_linear, plot_roc, plot_sse
-from utils import print_header, read_data, backspace, write
+from utils import print_header, read_data, backspace, write, train_test_split
 
 # Path to Datasets
 DATA_PATH = ('test_data/{}')

@@ -1,5 +1,6 @@
 """
 Neural Networks
+https://www.analyticsvidhya.com/blog/2017/05/neural-network-from-scratch-in-python-and-r/
 """
 import numpy as np
 from utils import *

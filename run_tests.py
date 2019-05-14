@@ -62,7 +62,6 @@ def test_logistic_regression():
 
     logreg.fit(train_x, train_y)
     probabilities = logreg.predict_proba(test_x)
-
     plot_roc("ROC Curve for Wisconsin Breast Cancer Dataset", test_y, probabilities)
 
 def test_k_means():
